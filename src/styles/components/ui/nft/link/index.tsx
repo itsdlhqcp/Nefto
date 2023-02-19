@@ -3,6 +3,7 @@ import React, { FunctionComponent, ReactElement } from "react"
 import { useRouter } from "next/router"
 
 type LinkProps = {
+  legacyBehavior: boolean
   href: string
   children: ReactElement
   activeClass: string

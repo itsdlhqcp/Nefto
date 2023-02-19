@@ -2,7 +2,7 @@
 
 import type { NextPage } from 'next'
 import { useState } from 'react';
-import { BaseLayout } from '../../styles/components'
+import { BaseLayout } from '../../styles/components/ui'
 import { Switch } from '@headlessui/react'
 import Link from 'next/link'
 

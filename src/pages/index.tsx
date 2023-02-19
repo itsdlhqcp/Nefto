@@ -29,18 +29,20 @@
 /* eslint-disable @next/next/no-img-element */
 
 // import type { NextPage } from 'next';
-import { BaseLayout,NftList } from '@/styles/components';
-import { NftMeta } from '@/styles/components/layouts/types/nft';
+import { BaseLayout,NftList } from '../styles/components/ui';
+import { NftMeta } from '../styles/components/ui/layouts/types/nft';
 import type { NextPage } from 'next';
-
-import nfts from '../styles/components/layouts/content/meta.json';
+import nfts from '../styles/components/ui/layouts/content/meta.json';
+ import useWeb3 from "../provider/web3"
 
 
 
 
 const Home: NextPage = () => {
+  const { test } = useWeb3();
   return (
     <BaseLayout>
+    {test}
       <div className="relative bg-gray-50 pt-16 pb-20 px-4 sm:px-6 lg:pt-24 lg:pb-28 lg:px-8">
         <div className="absolute inset-0">
           <div className="bg-white h-1/3 sm:h-2/3" />

@@ -20,6 +20,8 @@
       "@/*": ["./src/*"],
       "@ui":["componenets/ui"],
       "@ui/*":["components/ui/*"],
+      "@providers":["componenets/providers"],
+      "@providers/*":["components/providers/*"],
       "@_types/*":["types/*"]
 
     }
