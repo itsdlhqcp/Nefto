@@ -1,47 +1,18 @@
-
-// import { Inter } from '@next/font/google'
-
-
-// const inter = Inter({ subsets: ['latin'] })
-
-// export default function Home() {
-//   return (
-//     <>HELLO WORLD</>
-//   )
-// }
-
-// import { NextPage } from 'next'
-// import BaseLayout from '@/styles/components/layouts/BaseLayout'
-
-
-// const Home: NextPage = () => {
-
-//   return (
-//     <BaseLayout>
-//     <div >
-//       Helooooooo
-//     </div>
-//     </BaseLayout>
-//   )
-// }
-// export default Home
-
-/* eslint-disable @next/next/no-img-element */
-
-// import type { NextPage } from 'next';
 import { BaseLayout,NftList } from '../styles/components/ui';
 import { NftMeta } from '../styles/components/ui/layouts/types/nft';
 import type { NextPage } from 'next';
 import nfts from '../styles/components/ui/layouts/content/meta.json';
- import useWeb3 from "../provider/web3"
-
-
-
+import useWeb3 from "../provider/web3"
 
 const Home: NextPage = () => {
-  // const  {test} = useWeb3();
+  const { ethereum, provider, isLoading, contract } = useWeb3();
   return (
     <BaseLayout>
+
+{`Is Loading: ${isLoading}, `}
+      {`Ethereum: ${ethereum}, `}
+      {`Provider: ${provider}, `}
+      {`Contract: ${contract}, `}
     {/* {test} */}
       <div className="relative bg-gray-50 pt-16 pb-20 px-4 sm:px-6 lg:pt-24 lg:pb-28 lg:px-8">
         <div className="absolute inset-0">
