@@ -2,18 +2,34 @@ import { BaseLayout,NftList } from '../styles/components/ui';
 import { NftMeta } from '../styles/components/ui/layouts/types/nft';
 import type { NextPage } from 'next';
 import nfts from '../styles/components/ui/layouts/content/meta.json';
-import useWeb3 from "../provider/web3"
+import {useWeb3} from "../provider/web3"
 
 const Home: NextPage = () => {
-  const { ethereum, provider, isLoading, contract } = useWeb3();
+  // const { ethereum } = useWeb3();
+  // console.log(ethereum);
+  // 
+  const { provider, contract } = useWeb3();
+                                                
+  const getNftInfo = async () => {
+    console.log(await contract!.name());            ///HERE THE FUNCTION AFTER PROCESSING AT UTIL FILE GET THE NAME AND SYMBOL
+    console.log(await contract!.symbol());
+  }
+
+  if (contract) {
+    getNftInfo();
+  }                             ///IF INFO AVAILABLE THEN GET ACCOUNT DETAILS
+
+  const getAccounts = async () => {
+    const accounts = await provider!.listAccounts();
+    console.log(accounts[0]);
+  }
+
+  if (provider) {
+    getAccounts();
+  }
+
   return (
     <BaseLayout>
-
-{`Is Loading: ${isLoading}, `}
-      {`Ethereum: ${ethereum}, `}
-      {`Provider: ${provider}, `}
-      {`Contract: ${contract}, `}
-    {/* {test} */}
       <div className="relative bg-gray-50 pt-16 pb-20 px-4 sm:px-6 lg:pt-24 lg:pb-28 lg:px-8">
         <div className="absolute inset-0">
           <div className="bg-white h-1/3 sm:h-2/3" />
@@ -28,10 +44,9 @@ const Home: NextPage = () => {
           <NftList
             nfts={nfts as NftMeta[]}
           />
-        </div>   
-      </div> 
+        </div>
+      </div>
     </BaseLayout>
   )
 }
-
 export default Home
