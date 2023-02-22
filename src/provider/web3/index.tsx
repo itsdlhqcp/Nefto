@@ -18,6 +18,7 @@ const Web3Provider: FunctionComponent<Props>  = ({children}) => {
    async function initWeb3() {                                      ///LOADS ETH FROM UTILS FILE
       const provider = new ethers.providers.Web3Provider(window.ethereum as any);
       const contract =  await loadContract("NftMarket", provider);
+      
       setWeb3Api({
         ethereum: window.ethereum,             ///RENDERS AT SCREEN LEVEL
         provider,
