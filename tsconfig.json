@@ -24,7 +24,8 @@
       "@providers/*":["components/providers/*"],
       "@hooks":["componenets/hooks"],
       "@hooks/*":["components/hooks/*"],
-      "@_types/*":["types/*"]
+      "@_types/*":["types/*"],
+      "@_types/hooks":["../../layouts/types/hooks"]
 
     }
   },
