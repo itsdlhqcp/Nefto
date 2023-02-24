@@ -5,28 +5,30 @@ import nfts from '../styles/components/ui/layouts/content/meta.json';
 import {useWeb3} from "../provider/web3"
 
 const Home: NextPage = () => {
+
+  const { provider, contract } = useWeb3();
   // const { ethereum } = useWeb3();
   // console.log(ethereum);
   // 
-  const { provider, contract } = useWeb3();
+  
                                                 
-  const getNftInfo = async () => {
-    console.log(await contract!.name());            ///HERE THE FUNCTION AFTER PROCESSING AT UTIL FILE GET THE NAME AND SYMBOL
-    console.log(await contract!.symbol());
-  }
+  // const getNftInfo = async () => {
+  //   console.log(await contract!.name());            ///HERE THE FUNCTION AFTER PROCESSING AT UTIL FILE GET THE NAME AND SYMBOL
+  //   console.log(await contract!.symbol());
+  // }
 
-  if (contract) {
-    getNftInfo();
-  }                             ///IF INFO AVAILABLE THEN GET ACCOUNT DETAILS
+  // if (contract) {
+  //   getNftInfo();
+  // }                             ///IF INFO AVAILABLE THEN GET ACCOUNT DETAILS
 
-  const getAccounts = async () => {
-    const accounts = await provider!.listAccounts();
-    console.log(accounts[0]);
-  }
+  // const getAccounts = async () => {
+  //   const accounts = await provider!.listAccounts();
+  //   console.log(accounts[0]);
+  // }
 
-  if (provider) {
-    getAccounts();
-  }
+  // if (provider) {
+  //   getAccounts();
+  // }
 
   return (
     <BaseLayout>

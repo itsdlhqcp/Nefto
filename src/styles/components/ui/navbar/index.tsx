@@ -6,6 +6,9 @@ import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import ActiveLink from '../nft/link'
 import Link from 'next/link'
+import { useAccount } from '../hooks'
+
+
 ///Routing and connection of navbar with differnt pages is navigated from here
 const navigation = [
   { name: 'Explore', href: '/', current: true },
@@ -19,6 +22,9 @@ function classNames(...classes: string[]) {
 }
 
 export default function Example() {
+  const { data } = useAccount("Some Random Params");
+
+  console.log(data);
   return (
     <Disclosure as="nav" className="bg-gray-800">
       {({ open }) => (
