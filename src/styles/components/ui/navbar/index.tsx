@@ -6,7 +6,8 @@ import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import ActiveLink from '../nft/link'
 import Link from 'next/link'
-import { useAccount } from '../hooks'
+// import { useAccount } from '../hooks'
+import { useWeb3 } from '@/provider/web3'
 
 
 ///Routing and connection of navbar with differnt pages is navigated from here
@@ -21,10 +22,12 @@ function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ')
 }
 
-export default function Example() {
-  const { data } = useAccount("Some Random Params");
-
+export default function Navbar() {
+  const { hooks } = useWeb3();  ///account is extracted from browser to webapk here 
+  const { data } = hooks.useAccount("");
+   
   console.log(data);
+
   return (
     <Disclosure as="nav" className="bg-gray-800">
       {({ open }) => (
