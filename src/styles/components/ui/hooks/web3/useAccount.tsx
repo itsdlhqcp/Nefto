@@ -12,6 +12,7 @@ export const hookFactory: AccountHookFactory= ({provider}) => () => {
     provider ? "web3/useAccount" :null,   
     async () => {
       const accounts =await provider!.listAccounts();
+      console.log(accounts);
       const account = accounts[0];
       if (!account) {
         throw "Cannot retrieve account! please ,connnect to web3 wallet."
@@ -25,4 +26,3 @@ export const hookFactory: AccountHookFactory= ({provider}) => () => {
   return swrRes;
 }
 
-// export const useAccount = hookFactory({ethereum: null, provider: null});
