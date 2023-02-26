@@ -1,8 +1,8 @@
 import { Web3Dependencies } from "../../layouts/types/hooks";
-import { hookFactory as createAccountHook, UseAccountHook } from "./useAccount";
+import { hookFactory as createAccountHook, useAccountHook } from "./useAccount";
 
 export type Web3Hooks = {
-  useAccount: UseAccountHook;
+  useAccount: useAccountHook;
 }
 
 export type SetupHooks = {

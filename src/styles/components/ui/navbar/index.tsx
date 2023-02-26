@@ -8,6 +8,8 @@ import ActiveLink from '../nft/link'
 import Link from 'next/link'
 // import { useAccount } from '../hooks'
 import { useWeb3 } from '@/provider/web3'
+import { useAccount } from '../hooks/web3'
+
 
 
 ///Routing and connection of navbar with differnt pages is navigated from here
@@ -23,10 +25,14 @@ function classNames(...classes: string[]) {
 }
 
 export default function Navbar() {
-  const { hooks } = useWeb3();  ///account is extracted from browser to webapk here 
-  const { data } = hooks.useAccount("");
+  // const { hooks } = useWeb3();  ///account is extracted from browser to webapk here 
+  // const { data } = hooks.useAccount("");
+
+  const { account } = useAccount();
+
+  console.log(account.data);
    
-  console.log(data);
+  // console.log(data);
 
   return (
     <Disclosure as="nav" className="bg-gray-800">
