@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@headlessui/react": "^1.7.10",
-    "@heroicons/react": "^2.0.15",
+    "@heroicons/react": "^2.0.17",
     "@metamask/providers": "^10.2.1",
     "@next/font": "13.1.6",
     "@openzeppelin/contracts": "^4.8.1",
@@ -25,7 +25,9 @@
     "react": "^18.2.0",
     "react-dom": "18.2.0",
     "swr": "^2.0.3",
-    "typescript": "4.9.5"
+    "typescript": "4.9.5",
+    "wallet": "^2.1.528",
+    "web3": "^1.8.2"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.13",

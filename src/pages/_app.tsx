@@ -10,7 +10,7 @@ export default function App({ Component, pageProps }: AppProps) {
     <>
     <Navbar/>
     <Web3Provider>
-      <BaseLayout>
+      <BaseLayout> 
       <Component {...pageProps} />
       </BaseLayout>
     </Web3Provider>
