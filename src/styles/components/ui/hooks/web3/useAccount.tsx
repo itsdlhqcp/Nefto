@@ -1,35 +1,34 @@
+
 import { useEffect } from "react";
-import useSWR from "swr";
 import { CryptoHookFactory } from "../../layouts/types/hooks";
 
-// type AccountHookFactory = CryptoHookFactory<string>
+import useSWR from "swr";
+
 type UseAccountResponse = {
-  connect: () => void;
-  isLoading: boolean;
-  isInstalled: boolean;
+  connect: () => void
 }
 
 type AccountHookFactory = CryptoHookFactory<string, UseAccountResponse>
 
-// deps -> provider, ethereum, contract (web3State)
-export type useAccountHook = ReturnType<AccountHookFactory>
-export const hookFactory: AccountHookFactory = ({provider, ethereum, isLoading}) => () => {
-  const {data, mutate, isValidating, ...swr} = useSWR(
-    provider ? "web3/useAccount" :null,   
+export type UseAccountHook = ReturnType<AccountHookFactory>
+
+export const hookFactory: AccountHookFactory = ({provider, ethereum}) => () => {
+  const swrRes = useSWR(
+    provider ? "web3/useAccount" : null,
     async () => {
-      const accounts =await provider!.listAccounts();
-      console.log(accounts);
+      const accounts = await provider!.listAccounts();
       const account = accounts[0];
+
       if (!account) {
-        throw "Cannot retrieve account! please ,connnect to web3 wallet."
+        throw "Cannot retreive account! Please, connect to web3 wallet."
       }
-      return account;  ///if there provider list avail acctnts
-     }, {
+
+      return account;
+    }, {
       revalidateOnFocus: false
-     }
+    }
   )
 
-   ///HANDLING AFTER SIGNIN INTO ACCCOUNT
   useEffect(() => {
     ethereum?.on("accountsChanged", handleAccountsChanged);
     return () => {
@@ -41,8 +40,9 @@ export const hookFactory: AccountHookFactory = ({provider, ethereum, isLoading})
     const accounts = args[0] as string[];
     if (accounts.length === 0) {
       console.error("Please, connect to Web3 wallet");
-    } else if (accounts[0] !== data) {
-      mutate(accounts[0]);
+    } else if (accounts[0] !== swrRes.data) {
+      alert("accounts has changed");
+      console.log(accounts[0]);
     }
   }
 
@@ -55,13 +55,7 @@ export const hookFactory: AccountHookFactory = ({provider, ethereum, isLoading})
   }
 
   return {
-    ...swr,
-    data,
-    isValidating,
-    isLoading: isLoading || isValidating,
-    isInstalled: ethereum?.isMetaMask || false,
-    mutate,
+    ...swrRes,
     connect
   };
 }
-
