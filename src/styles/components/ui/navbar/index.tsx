@@ -1,14 +1,12 @@
 /* eslint-disable @next/next/no-img-element */
 
 ///Navbar UI render from here
-import { Fragment } from 'react'
-import { Disclosure, Menu, Transition } from '@headlessui/react'
-import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
+import { Disclosure} from '@headlessui/react'
+import { Bars3Icon,  XMarkIcon } from '@heroicons/react/24/outline'
 import ActiveLink from '../nft/link'
 import Link from 'next/link'
 // import { useAccount } from '../hooks'
-import { useWeb3 } from '@/provider/web3'
-import { useAccount } from '../hooks/web3'
+import { useAccount, useNetwork } from '../hooks/web3'
 import Walletbar from './Walletbar'
 
 
@@ -30,8 +28,10 @@ export default function Navbar() {
   // const { data } = hooks.useAccount("");
 
   const { account } = useAccount();
+  const { network } = useNetwork();
+  console.log(network.data);
 
-  console.log(account.data);           /// Account data fetched and published here and passed at return dev
+         /// Account data fetched and published here and passed at return dev
    
   // console.log(data);
 
@@ -39,8 +39,6 @@ export default function Navbar() {
     <Disclosure as="nav" className="bg-gray-800">
       {({ open }) => (
         <>
-        {account.data}
-        
           <div className="px-2 mx-auto max-w-7xl sm:px-6 lg:px-8">
             <div className="relative flex items-center justify-between h-16">
               <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">

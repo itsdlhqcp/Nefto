@@ -21,7 +21,8 @@ const Walletbar: FunctionComponent<WalletbarProps> = ({
   connect,
   account
 }) => {
-
+  console.log("Is Loading ",isLoading);   
+  console.log("Is Instaled ",isInstalled);
   if (isLoading) {
     return (
       <div>
@@ -56,20 +57,19 @@ const Walletbar: FunctionComponent<WalletbarProps> = ({
               <button
                 disabled={true}
                 className="block px-4 pt-2 text-xs text-gray-700 disabled:text-gray-500">
-                {`0x${account[2]}${account[3]}${account[4]}....${account.slice(-4)}`}
+                {`0x*****${account.slice(-4)}`}
               </button>
             )}
           </Menu.Item>
           <Menu.Item>
             {({ active }) => (
-              <Link href="/profile">
-                <a
+              <Link href="/profile" legacyBehavior>      
+                <a 
                   className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
                 >
                   Profile
                 </a>
               </Link>
-
             )}
           </Menu.Item>
         </Menu.Items>

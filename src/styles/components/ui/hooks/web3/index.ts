@@ -11,5 +11,11 @@ export const useAccount = () => {
   }
 }
 
+export const useNetwork = () => {
+  const hooks = useHooks();
+  const swrRes = hooks.useNetwork();
 
-// export { useAccount } from "./web3/useAccount";
+  return {
+    network: swrRes
+  }
+}
