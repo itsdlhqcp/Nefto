@@ -25,7 +25,8 @@ export const hookFactory: AccountHookFactory = ({provider, ethereum, isLoading})
       }
       return account;  ///if there provider list avail acctnts
      }, {
-      revalidateOnFocus: false
+      revalidateOnFocus: false,
+      shouldRetryOnError: false
      }
   )
 
@@ -58,7 +59,7 @@ export const hookFactory: AccountHookFactory = ({provider, ethereum, isLoading})
     ...swr,
     data,
     isValidating,
-    isLoading: isLoading || isValidating,
+    isLoading: isLoading as boolean,
     isInstalled: ethereum?.isMetaMask || false,
     mutate,
     connect

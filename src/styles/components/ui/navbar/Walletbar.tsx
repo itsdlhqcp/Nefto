@@ -21,8 +21,6 @@ const Walletbar: FunctionComponent<WalletbarProps> = ({
   connect,
   account
 }) => {
-  console.log("Is Loading ",isLoading);   
-  console.log("Is Instaled ",isInstalled);
   if (isLoading) {
     return (
       <div>
