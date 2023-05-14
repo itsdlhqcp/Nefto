@@ -65,6 +65,7 @@ contract NftMarket is ERC721URIStorage {
 
     return newTokenId;
   }
+  
 
   //function to buy nftitem
   function buyNft(
@@ -85,6 +86,9 @@ contract NftMarket is ERC721URIStorage {
    _transfer(owner, msg.sender, tokenId);
    payable(owner).transfer(msg.value);
   }
+
+
+  //FUNCTION TO CREATE nft
 
   function _createNftItem(
     uint tokenId,

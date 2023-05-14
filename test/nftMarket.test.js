@@ -1,5 +1,6 @@
 const NftMarket = artifacts.require("NftMarket");
 const { ethers } = require("ethers");
+const { describe, before } = require("node:test");
 
  
 contract("NftMarket", accounts => {
@@ -54,6 +55,29 @@ contract("NftMarket", accounts => {
       assert.equal(nftItem.price,_nftPrice, "Nft price is not correct");
       assert.equal(nftItem.creator,accounts[0], "creator is not account[0]");
       assert.equal(nftItem.isListed,true, "Token is not listed");
+    })
+  })
+  describe("Buy NFT", () => {
+    before(async () => {
+      await _contract.buyNft(1, {
+        from: accounts[1],
+        value: _nftPrice
+      })
+    })
+
+    it("should unlist the item", async () => {
+      const listedItem = await _contract.getNftItem(1);
+      assert.equal(listedItem.isListed, false, "Item is still listed");
+    })
+
+    it("should decrease listed items count", async () => {
+      const listedItemsCount = await _contract.listedItemsCount();
+      assert.equal(listedItemsCount.toNumber(), 0, "Count has not been decrement");
+    })
+
+    it("should change the owner", async () => {
+      const currentOwner = await _contract.ownerOf(1);
+      assert.equal(currentOwner, accounts[1], "Item is still listed");
     })
   })
 })
