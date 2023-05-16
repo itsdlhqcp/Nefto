@@ -19,8 +19,12 @@ contract NftMarket is ERC721URIStorage {
  Counters.Counter private _listedItems;
  Counters.Counter private _tokenIds;
 
+uint256[] private _allNfts;
+
  mapping(string => bool) private _usedTokenURIs;
  mapping(uint => NftItem) private _idToNftItem;
+
+mapping(uint => uint) private _idToNftIndex;
 
 
   uint public listingPrice = 0.025 ether;
@@ -48,6 +52,15 @@ contract NftMarket is ERC721URIStorage {
 
   function tokenURIExists(string memory tokenURI) public view returns (bool) {
     return _usedTokenURIs[tokenURI] == true;
+  }
+
+   function totalSupply() public view returns (uint) {
+    return _allNfts.length;
+  }
+
+  function tokenByIndex(uint index) public view returns (uint) {
+    require(index < totalSupply(), "Index out of bounds");
+    return _allNfts[index];
   }
   //this helps to increment the counts if id's
   function mintToken(string memory tokenURI, uint price) public payable returns (uint){
@@ -103,6 +116,25 @@ contract NftMarket is ERC721URIStorage {
         true
       );
       emit NftItemCreated(tokenId, price, msg.sender, true);
+  }
+
+   function _beforeTokenTransfer(
+    address from,
+    address to,
+    uint tokenId,
+    uint256 batchSize
+  ) internal virtual override {
+    super._beforeTokenTransfer(from, to, tokenId,batchSize);
+
+    // minting token
+    if (from == address(0)) {
+      _addTokenToAllTokensEnumaration(tokenId);
+    }
+  }
+
+  function _addTokenToAllTokensEnumaration(uint tokenId) private {
+    _idToNftIndex[tokenId] = _allNfts.length;
+    _allNfts.push(tokenId);
   }
 
   
