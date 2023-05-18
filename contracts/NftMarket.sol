@@ -4,8 +4,9 @@ pragma solidity >=0.4.22 <0.9.0;
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 //minted tokens are stored in piniata
 import "@openzeppelin/contracts/utils/Counters.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
 
-contract NftMarket is ERC721URIStorage {
+contract NftMarket is ERC721URIStorage, Ownable {
   using Counters for Counters.Counter;
 
    //handling of multiple items instances
@@ -45,6 +46,11 @@ mapping(uint => uint) private _idToNftIndex;
  
 
   constructor() ERC721("CreaturesNFT", "CNFT") {}
+ //function putting the Nft's on sale
+  function setListingPrice(uint newPrice) external onlyOwner {
+    require(newPrice > 0, "Price must be at least 1 wei");
+    listingPrice = newPrice;
+  }
 
   
   function getNftItem(uint tokenId) public view returns (NftItem memory){
@@ -107,10 +113,6 @@ function tokenOfOwnerByIndex(address owner, uint index) public view returns (uin
     return items;
   }
 
-  function burnToken(uint tokenId) public {
-    _burn(tokenId);
-  }
-
   //this helps to increment the counts if id's
   function mintToken(string memory tokenURI, uint price) public payable returns (uint){
     require(!tokenURIExists(tokenURI), "Token URI already exists");
@@ -147,6 +149,16 @@ function tokenOfOwnerByIndex(address owner, uint index) public view returns (uin
    //transfer the ownership of nft aftrer brought
    _transfer(owner, msg.sender, tokenId);
    payable(owner).transfer(msg.value);
+  }
+    //function which puts NFT's on slae at marketplace giving it listing price
+  function placeNftOnSale(uint tokenId, uint newPrice) public payable {
+    require(ERC721.ownerOf(tokenId) == msg.sender, "You are not owner of this nft");
+    require(_idToNftItem[tokenId].isListed == false, "Item is already on sale");
+    require(msg.value == listingPrice, "Price must be equal to listing price");
+
+    _idToNftItem[tokenId].isListed = true;
+    _idToNftItem[tokenId].price = newPrice;
+    _listedItems.increment();
   }
 
 
