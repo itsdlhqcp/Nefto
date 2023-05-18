@@ -3,6 +3,7 @@ import * as React from 'react';
 import { createDefaultState, createWeb3State, loadContract, Web3State } from "./utils";
 import { ethers } from "ethers";
 import { MetaMaskInpageProvider } from "@metamask/providers";
+import { NftMarketContract } from "@/styles/components/ui/layouts/types/nftMarketContract";
 
 function pageReload() {
   window.location.reload();
@@ -45,7 +46,7 @@ const Web3Provider: FunctionComponent<Props>  = ({children}) => {
       setWeb3Api(createWeb3State({
         ethereum: window.ethereum,
         provider,
-        contract,
+        contract: contract as unknown as NftMarketContract,
         isLoading: false
       }))
     } catch(e: any) {
