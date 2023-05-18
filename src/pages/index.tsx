@@ -1,6 +1,7 @@
 import { useListedNfts } from '@/styles/components/ui/hooks/web3';
 import { BaseLayout,NftList } from '../styles/components/ui';
 import type { NextPage } from 'next';
+import { Nft } from '@/styles/components/ui/layouts/types/nft';
 
 
 
@@ -24,7 +25,7 @@ const Home: NextPage = () => {
             </p>
           </div>
           <NftList
-           nfts={nfts?.data}
+           nfts={nfts.data as Nft[]}
           />
         </div>
       </div>
