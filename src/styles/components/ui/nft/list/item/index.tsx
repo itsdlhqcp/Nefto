@@ -2,11 +2,12 @@
 import { FunctionComponent } from "react";
 import { Nft, NftMeta } from "../../../layouts/types/nft";
 
-type NftItemsProps ={
+type NftItemProps ={
   item: Nft;
+  buyNft: (token: number, value: number) => Promise<void>;
 }
 ///This function will take the data from index.js of list and render at UI
-const NftItem: FunctionComponent<NftItemsProps> = ({item}) => {
+const NftItem: FunctionComponent<NftItemProps> = ({item, buyNft}) => {
     return (
         <>
           <div className="flex-shrink-0">
@@ -32,7 +33,7 @@ const NftItem: FunctionComponent<NftItemsProps> = ({item}) => {
                   <dt className="order-2 text-sm font-medium text-gray-500">Price</dt>
                   <dd className="order-1 text-xl font-extrabold text-indigo-600">
                     <div className="flex items-center justify-center">
-                      100
+                    {item.price}
                       {/* <img className="h-6" src="/images/small-eth.webp" alt="ether icon"/>
                       ETH */}
                     </div>
@@ -52,6 +53,9 @@ const NftItem: FunctionComponent<NftItemsProps> = ({item}) => {
             </div>
             <div>
               <button
+               onClick={() => {
+                buyNft(item.tokenId, item.price);
+              }}
                 type="button"
                 className="inline-flex items-center px-4 py-2 mr-2 text-base font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none disabled:cursor-not-allowed hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
               >
