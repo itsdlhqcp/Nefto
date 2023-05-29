@@ -1,6 +1,6 @@
 
+import { CryptoHookFactory } from "@/types/hooks";
 import useSWR from "swr";
-import { CryptoHookFactory } from "../../layouts/types/hooks";
 
 
 //Targeted networks are connected with respectiove id here

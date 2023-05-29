@@ -139,11 +139,17 @@ const Profile: NextPage = () => {
                     Download Image
                   </button>
                   <button
-                    onClick={() => {}}
+                  disabled={activeNft.isListed}
+                     onClick={() => {
+                      nfts.listNft(
+                        activeNft.tokenId,
+                        activeNft.price
+                      )
+                    }}
                     type="button"
-                    className="flex-1 px-4 py-2 ml-3 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                    className="flex-1 px-4 py-2 ml-3 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm disabled:text-gray-400 disabled:cursor-not-allowed hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                   >
-                    Transfer?
+                    {activeNft.isListed ? "Nft is listed": "List Nft"}
                   </button>
                 </div>
               </div>
