@@ -4,8 +4,9 @@ import type { NextPage } from 'next'
 import { BaseLayout} from '../styles/components/ui';
 import { useEffect, useState } from 'react';
 
-import { Nft } from '../styles/components/ui/layouts/types/nft';
+
 import { useOwnedNfts } from '@/styles/components/ui/hooks/web3';
+import { Nft } from '@/types/ntf';
 
 const tabs = [
   { name: 'Your Collection', href: '#', current: true },
@@ -17,6 +18,7 @@ function classNames(...classes: string[]) {
 
 const Profile: NextPage = () => {
   const { nfts }  = useOwnedNfts();
+  //function to show activated nft at profile ,implimented in useeffect
   const [activeNft, setActiveNft] = useState<Nft>();
 
   useEffect(() => {

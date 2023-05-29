@@ -1,7 +1,8 @@
 import { ethers } from "ethers";
 import useSWR from "swr";
-import { Nft } from "../../layouts/types/nft";
-import { CryptoHookFactory } from "../../layouts/types/hooks";
+import { CryptoHookFactory } from "@/types/hooks";
+import { Nft } from "@/types/ntf";
+
 
 type UseOwnedNftsResponse = {}
 type OwnedNftsHookFactory = CryptoHookFactory<Nft[], UseOwnedNftsResponse>

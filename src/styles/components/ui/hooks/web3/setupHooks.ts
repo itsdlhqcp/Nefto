@@ -1,4 +1,4 @@
-import { Web3Dependencies } from "../../layouts/types/hooks";
+import { Web3Dependencies } from "@/types/hooks";
 import { hookFactory as createAccountHook, useAccountHook } from "./useAccount";
 import { hookFactory as createNetworkHook, useNetworkHook } from "./useNetwork";
 import { hookFactory as createListedNftsHook, UseListedNftsHook } from "./useListedNfts";

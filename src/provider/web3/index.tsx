@@ -3,7 +3,8 @@ import * as React from 'react';
 import { createDefaultState, createWeb3State, loadContract, Web3State } from "./utils";
 import { ethers } from "ethers";
 import { MetaMaskInpageProvider } from "@metamask/providers";
-import { NftMarketContract } from "@/styles/components/ui/layouts/types/nftMarketContract";
+import { NftMarketContract } from "@/types/nftMarketContract";
+
 
 function pageReload() {
   window.location.reload();
@@ -56,7 +57,7 @@ const Web3Provider: FunctionComponent<Props>  = ({children}) => {
       console.log(e.message)
       console.log(e);
       console.error("Please, install web3 wallet");
-      setWeb3Api((api) => createWeb3State({
+      setWeb3Api((api: any) => createWeb3State({
         ...api as any,
         isLoading: false,
       }))

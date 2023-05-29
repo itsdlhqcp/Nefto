@@ -1,5 +1,5 @@
 import { setupHooks, Web3Hooks } from "@/styles/components/ui/hooks/web3/setupHooks";
-import { Web3Dependencies } from "@/styles/components/ui/layouts/types/hooks";
+import { Web3Dependencies } from "@/types/hooks";
 import { MetaMaskInpageProvider } from "@metamask/providers";
 import { Contract, ethers, providers } from "ethers";
 

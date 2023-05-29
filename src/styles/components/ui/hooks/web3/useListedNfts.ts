@@ -1,8 +1,8 @@
 
 import useSWR from "swr";
-import { CryptoHookFactory } from "../../layouts/types/hooks";
-import { Nft } from "../../layouts/types/nft";
 import { ethers } from "ethers";
+import { CryptoHookFactory } from "@/types/hooks";
+import { Nft } from "@/types/ntf";
 
 type UseListedNftsResponse = {
     buyNft: (token: number, value: number) => Promise<void>
@@ -31,7 +31,6 @@ export const hookFactory: ListedNftsHookFactory = ({contract}) => () => {
               meta
             })
           }
-    debugger
       return nfts;
     }
   )
