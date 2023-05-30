@@ -1,6 +1,7 @@
+import { CryptoHookFactory } from "@/types/hooks";
 import { useEffect } from "react";
 import useSWR from "swr";
-import { CryptoHookFactory } from "../../layouts/types/hooks";
+
 
 // type AccountHookFactory = CryptoHookFactory<string>
 type UseAccountResponse = {
