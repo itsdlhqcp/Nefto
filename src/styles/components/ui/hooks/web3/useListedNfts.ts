@@ -5,6 +5,7 @@ import { CryptoHookFactory } from "@/types/hooks";
 import { Nft } from "@/types/ntf";
 import { useCallback } from "react";
 import item from "../../nft/list/item";
+import { toast } from "react-toastify";
 
 
 
@@ -21,11 +22,12 @@ export const hookFactory: ListedNftsHookFactory = ({contract}) => () => {
     async () => {
         const nfts = [] as Nft[];
         const coreNfts = await contract!.getAllNftsOnSale();
-        // const owner = await contract!.ownerOf(item.tokenId);
+        
         for (let i = 0; i < coreNfts.length; i++) {
             const item = coreNfts[i];
             const tokenURI = await contract!.tokenURI(item.tokenId);
             const metaRes = await fetch(tokenURI);
+            const owner = await contract!.ownerOf(item.tokenId);
             const meta = await metaRes.json();
     
             nfts.push({
@@ -34,7 +36,7 @@ export const hookFactory: ListedNftsHookFactory = ({contract}) => () => {
               creator: item.creator,
               isListed: item.isListed,
               meta,
-              // owner
+              owner
             })
           }
       return nfts;
@@ -49,8 +51,13 @@ const _contract = contract;
           value: ethers.utils.parseEther(value.toString())
         }
       )
-      await result?.wait(); //WAIT TO PROCESS RESULT
-      alert("You have bought Nft. See profile page.")
+      await toast.promise(
+        result!.wait(), {
+          pending: "Processing transaction",
+          success: "Nft is yours! Go to Profile page",
+          error: "Processing error"
+        }
+      );
     } catch (e: any) {
       console.error(e.message);
     }

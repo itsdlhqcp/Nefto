@@ -132,6 +132,8 @@ export interface NftitemResponse {
   2: string;
   isListed: boolean;
   3: boolean;
+  owner: BigNumber;
+  4: BigNumber;
 }
 export interface NftMarketContract {
   /**
