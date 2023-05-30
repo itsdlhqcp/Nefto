@@ -4,6 +4,9 @@ import { ethers } from "ethers";
 import { CryptoHookFactory } from "@/types/hooks";
 import { Nft } from "@/types/ntf";
 import { useCallback } from "react";
+import item from "../../nft/list/item";
+
+
 
 type UseListedNftsResponse = {
     buyNft: (token: number, value: number) => Promise<void>
@@ -18,6 +21,7 @@ export const hookFactory: ListedNftsHookFactory = ({contract}) => () => {
     async () => {
         const nfts = [] as Nft[];
         const coreNfts = await contract!.getAllNftsOnSale();
+        // const owner = await contract!.ownerOf(item.tokenId);
         for (let i = 0; i < coreNfts.length; i++) {
             const item = coreNfts[i];
             const tokenURI = await contract!.tokenURI(item.tokenId);
@@ -29,7 +33,8 @@ export const hookFactory: ListedNftsHookFactory = ({contract}) => () => {
               tokenId: item.tokenId.toNumber(),
               creator: item.creator,
               isListed: item.isListed,
-              meta
+              meta,
+              // owner
             })
           }
       return nfts;
